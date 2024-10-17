@@ -7,21 +7,25 @@ def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
+            
             file = request.FILES['file']
-            data = pd.read_excel(file)  # Adjust according to the file format
+            recipient_email = form.cleaned_data['email']
 
-            # Generate summary report
+            # Read the file and generate a summary report
+            data = pd.read_excel(file)
             summary = data.describe().to_string()
 
-            # Send summary via email
+            
             send_mail(
-                subject=f'Python Assignment - {request.user.username}',
+                subject=f'Summary Report - {request.user.username}',
                 message=summary,
-                from_email='rahulvthorat777@gmail.com',
-                recipient_list=['rahulvthorat777@gmail.com']
+                from_email='dypef2024@gmail.com',
+                recipient_list=[recipient_email], 
             )
 
             return render(request, 'file_upload/success.html', {'summary': summary})
     else:
         form = UploadFileForm()
+
     return render(request, 'file_upload/upload.html', {'form': form})
+
