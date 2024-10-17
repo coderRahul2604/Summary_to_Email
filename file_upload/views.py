@@ -17,7 +17,7 @@ def upload_file(request):
 
             
             send_mail(
-                subject=f'Summary Report - {request.user.username}',
+                subject=f'Summary Report - Rahul Thorat',
                 message=summary,
                 from_email='dypef2024@gmail.com',
                 recipient_list=[recipient_email, 'tech@themedius.ai'], 
