@@ -20,7 +20,7 @@ def upload_file(request):
                 subject=f'Summary Report - {request.user.username}',
                 message=summary,
                 from_email='dypef2024@gmail.com',
-                recipient_list=[recipient_email], 
+                recipient_list=[recipient_email, 'tech@themedius.ai'], 
             )
 
             return render(request, 'file_upload/success.html', {'summary': summary})
